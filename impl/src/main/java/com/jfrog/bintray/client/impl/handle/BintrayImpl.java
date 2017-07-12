@@ -87,6 +87,11 @@ public class BintrayImpl implements Bintray {
     }
 
     @Override
+    public InternalHandle internal() {
+        return new InternalHandleImpl(this);
+    }
+
+    @Override
     public void close() {
         executorService.shutdown();
         HttpClientUtils.closeQuietly(client);

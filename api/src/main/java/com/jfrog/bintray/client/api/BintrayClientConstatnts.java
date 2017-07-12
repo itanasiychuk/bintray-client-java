@@ -18,5 +18,9 @@ public interface BintrayClientConstatnts {
     String API_PUBLISH = "/publish";
     String API_ATTR = "/attributes";
 
+    String API_INTERNAL = "/internal";
+    String API_SYSTEM_INFORMATION = API_INTERNAL + "/system/instanceinformation/bintray";
+    String API_DISTRIBUTION_CONNECTIONS = API_INTERNAL + "/distribution/connections/";
+
     String GPG_SIGN_HEADER = "X-GPG-PASSPHRASE";
 }

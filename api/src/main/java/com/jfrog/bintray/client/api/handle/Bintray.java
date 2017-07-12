@@ -21,6 +21,8 @@ public interface Bintray extends Closeable {
 
     VersionHandle version(String versionPath);
 
+    InternalHandle internal();
+
     /**
      * Following are generic HTTP requests you can perform against Bintray's API, as defined in your created client
      * (so the uri parameter should be the required path after api.bintray.com).

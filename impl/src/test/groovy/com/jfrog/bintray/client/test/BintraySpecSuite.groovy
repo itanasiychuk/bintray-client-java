@@ -27,7 +27,8 @@ import static com.jfrog.bintray.client.api.BintrayClientConstatnts.API_REPOS
  * @author Dan Feldman
  */
 @RunWith(Suite)
-@Suite.SuiteClasses([RepoSpec.class, PackageSpec.class, VersionSpec.class, BintrayClientSpec.class, ProductSpec.class, SpecialArtifactUploadSpec.class])
+@Suite.SuiteClasses([RepoSpec.class, PackageSpec.class, VersionSpec.class, BintrayClientSpec.class, ProductSpec.class,
+    SpecialArtifactUploadSpec.class, InternalSpec.class])
 class BintraySpecSuite {
 
     public static final String REPO_CREATE_NAME = 'repoTest'

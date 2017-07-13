@@ -24,24 +24,26 @@ class InternalSpec extends Specification {
         systemInfo.getVersion()
     }
 
-    @Ignore("How to add artifactory distribution connections to bintray? Endpoint?")
+    @Ignore("How to add/remove artifactory distribution connections to bintray? Endpoint?")
     def 'Get artifactory distribution connections'() {
         setup:
         //TODO: Add connection to bintray
+        def hours = 2
         when:
-        Collection<Connection> connections = bintray.internal().artifactories().get()
+        Collection<Connection> connections = bintray.internal().artifactories(hours).get()
 
         then:
         connections
         //connections.size() == 0
     }
 
-    @Ignore("How to add edge distribution connections to bintray? Endpoint?")
+    @Ignore("How to add/remove edge distribution connections to bintray? Endpoint?")
     def 'Get edge distribution connections'() {
         setup:
         //TODO: Add connection to bintray
+        def hours = 2
         when:
-        Collection<Connection> connections = bintray.internal().edges().get()
+        Collection<Connection> connections = bintray.internal().edges(hours).get()
 
         then:
         connections

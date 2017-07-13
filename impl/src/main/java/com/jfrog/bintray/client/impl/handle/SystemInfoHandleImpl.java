@@ -43,8 +43,8 @@ public class SystemInfoHandleImpl implements SystemInfoHandle {
         try {
             systemInfoDetails = mapper.readValue(jsonContentStream, SystemInfoDetails.class);
         } catch (IOException e) {
-              log.error("Can't process the json file: " + e.getMessage());
-              throw e;
+            log.error("Can't process the json file: " + e.getMessage());
+            throw e;
         }
 
         return new SystemInfoImpl(systemInfoDetails);

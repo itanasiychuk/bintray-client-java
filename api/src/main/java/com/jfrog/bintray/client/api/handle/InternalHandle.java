@@ -5,6 +5,6 @@ package com.jfrog.bintray.client.api.handle;
  */
 public interface InternalHandle {
     SystemInfoHandle systemInfo();
-    ConnectionHandle artifactories();
-    ConnectionHandle edges();
+    ConnectionHandle artifactories(Integer hours);
+    ConnectionHandle edges(Integer hours);
 }

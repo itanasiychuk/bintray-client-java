@@ -16,25 +16,21 @@ import static com.jfrog.bintray.client.impl.handle.ConnectionHandleImpl.Connecti
 public class InternalHandleImpl implements InternalHandle {
     private static final Logger log = LoggerFactory.getLogger(InternalHandleImpl.class);
 
-    private SystemInfoHandle systemInfoHandle;
-    private ConnectionHandle artifactoryConnectionHandle;
-    private ConnectionHandle edgeConnectionHandle;
+    private BintrayImpl bintrayHandle;
 
     InternalHandleImpl(BintrayImpl bintrayHandle) {
-        this.systemInfoHandle = new SystemInfoHandleImpl(bintrayHandle);
-        this.artifactoryConnectionHandle = new ConnectionHandleImpl(bintrayHandle, ARTIFACTORY);
-        this.edgeConnectionHandle = new ConnectionHandleImpl(bintrayHandle, EDGE);
+        this.bintrayHandle = bintrayHandle;
     }
 
     public SystemInfoHandle systemInfo() {
-        return systemInfoHandle;
+        return new SystemInfoHandleImpl(bintrayHandle);
     }
 
-    public ConnectionHandle artifactories() {
-        return artifactoryConnectionHandle;
+    public ConnectionHandle artifactories(Integer hours) {
+        return new ConnectionHandleImpl(bintrayHandle, ARTIFACTORY, hours);
     }
 
-    public ConnectionHandle edges() {
-        return edgeConnectionHandle;
+    public ConnectionHandle edges(Integer hours) {
+        return new ConnectionHandleImpl(bintrayHandle, EDGE, hours);
     }
 }

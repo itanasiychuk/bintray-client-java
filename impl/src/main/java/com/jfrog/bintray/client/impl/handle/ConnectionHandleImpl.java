@@ -25,17 +25,21 @@ import static com.jfrog.bintray.client.api.BintrayClientConstatnts.API_DISTRIBUT
 public class ConnectionHandleImpl implements ConnectionHandle {
     private static final Logger log = LoggerFactory.getLogger(ConnectionHandleImpl.class);
 
+    private static final String HOURS_PARAM = "hours";
+
     private BintrayImpl bintrayHandle;
     private ConnectionType type;
+    private Integer hours;
 
-    ConnectionHandleImpl(BintrayImpl bintrayHandle, ConnectionType type) {
+    ConnectionHandleImpl(BintrayImpl bintrayHandle, ConnectionType type, Integer hours) {
         this.bintrayHandle = bintrayHandle;
         this.type = type;
+        this.hours = hours;
     }
 
     @Override
     public Collection<Connection> get() throws IOException, BintrayCallException {
-        HttpResponse response = bintrayHandle.get(API_DISTRIBUTION_CONNECTIONS + type.value, null);
+        HttpResponse response = bintrayHandle.get(getDistributionConnection(), null);
         InputStream jsonContentStream = response.getEntity().getContent();
         try {
             Collection<ConnectionDetails> connectionDetails = ObjectMapperHelper.get().readValue(jsonContentStream,
@@ -51,6 +55,15 @@ public class ConnectionHandleImpl implements ConnectionHandle {
             log.error("Can't process the json file: " + e.getMessage());
             throw e;
         }
+    }
+
+    private String getDistributionConnection() {
+        StringBuilder sb = new StringBuilder(API_DISTRIBUTION_CONNECTIONS + type.value);
+        if (hours != null && hours > 0) {
+            sb.append("?" + HOURS_PARAM + "=" + hours.toString());
+        }
+
+        return sb.toString();
     }
 
     @Override
